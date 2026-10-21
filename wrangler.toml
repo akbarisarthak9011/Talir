@@ -1,0 +1,15 @@
+# Cloudflare Pages settings for Tailr. Used when you deploy with Wrangler or connect the GitHub repo.
+name = "tailr"
+pages_build_output_dir = "."
+compatibility_date = "2026-10-01"
+
+# Workers AI binding: lets functions/api/ai.js use your free daily allowance (no API key).
+# If the binding does not appear after deploy, add it in the dashboard:
+# Workers & Pages > tailr > Settings > Bindings > Add > Workers AI, variable name "AI".
+[ai]
+binding = "AI"
+
+[vars]
+# Model used for rewriting. Llama 3.3 70B gives the best quality on the free allowance.
+# For more tailorings per day, try "@cf/qwen/qwen3-30b-a3b-fp8" (cheaper, answers are still validated).
+TAILR_MODEL = "@cf/meta/llama-3.3-70b-instruct-fp8-fast"

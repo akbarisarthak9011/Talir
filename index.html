@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tailr – Tailor your CV to any job description, free</title>
+<meta name="tailr-title-en" content="Tailr – Tailor your CV to any job description, free">
+<meta name="tailr-title-fr" content="Tailr – Adaptez votre CV à chaque offre d’emploi, gratuit">
+<meta name="description" content="Free CV tailoring tool. Upload your CV and a job description: Tailr checks what you really have, rewrites your CV for the job without inventing anything, fits it on one page, tests it like an ATS and gives you a PDF and Word file. English and French.">
+<meta property="og:title" content="Tailr – Tailor your CV to any job description">
+<meta property="og:description" content="See your keyword match, fix the gaps honestly, and download a tailored CV. Free, English and French, private.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#14202e">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/bricolage-grotesque-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<script src="config.js"></script>
+<script src="lang.js"></script>
+<script src="ads.js"></script>
+</head>
+<body>
+<a class="skip" href="#tool"><span data-l="en">Skip to the tool</span><span data-l="fr">Aller à l’outil</span></a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="./">Tailr<span>.</span></a>
+    <nav class="links" aria-label="Main">
+      <a class="navpage" href="#how"><span data-l="en">How it works</span><span data-l="fr">Comment ça marche</span></a>
+      <a class="navpage" href="#tips"><span data-l="en">CV tips</span><span data-l="fr">Conseils CV</span></a>
+      <a class="navpage" href="#faq">FAQ</a>
+      <div class="langs" role="group" aria-label="Language / Langue">
+        <button type="button" data-setlang="en" aria-pressed="true">EN</button>
+        <button type="button" data-setlang="fr" aria-pressed="false">FR</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <h1><span data-l="en">Fit your CV to the job in five minutes.</span><span data-l="fr">Ajustez votre CV à l’offre en cinq minutes.</span></h1>
+    <p class="lede"><span data-l="en">Upload your CV and a job description. Tailr rewrites it for that job without inventing anything, fits it on one page, tests it the way recruiting software reads it, and gives you a PDF and a Word file.</span><span data-l="fr">Importez votre CV et une offre d’emploi. Tailr le réécrit pour cette offre sans rien inventer, le fait tenir sur une page, le teste comme un logiciel de recrutement et vous donne un PDF et un fichier Word.</span></p>
+    <p class="badge"><span data-l="en">Free · No sign-up · Checked against your real CV</span><span data-l="fr">Gratuit · Sans inscription · Vérifié avec votre vrai CV</span></p>
+  </div>
+
+  <div class="wrap"><div class="ad" data-slot="top" hidden><span class="adlabel"><span data-l="en">Advertisement</span><span data-l="fr">Publicité</span></span></div></div>
+
+  <div class="wrap tool" id="tool">
+    <ol class="steps" id="steps">
+      <li><b>01</b><span data-l="en">Your CV</span><span data-l="fr">Votre CV</span></li>
+      <li><b>02</b><span data-l="en">Check</span><span data-l="fr">Vérification</span></li>
+      <li><b>03</b><span data-l="en">The job</span><span data-l="fr">L’offre</span></li>
+      <li><b>04</b><span data-l="en">Match</span><span data-l="fr">Correspondance</span></li>
+      <li><b>05</b><span data-l="en">Tailored CV</span><span data-l="fr">CV adapté</span></li>
+    </ol>
+
+    <!-- STEP 1: CV -->
+    <section class="panel" id="s1" aria-labelledby="h1s">
+      <h2 id="h1s"><span data-l="en">Add your CV</span><span data-l="fr">Ajoutez votre CV</span></h2>
+      <label class="drop" id="dropCv" for="fileCv">
+        <span><p><b><span data-l="en">Upload your CV</span><span data-l="fr">Importez votre CV</span></b></p>
+        <small><span data-l="en">PDF, Word (.docx) or .txt · drag and drop or click</span><span data-l="fr">PDF, Word (.docx) ou .txt · glissez-déposez ou cliquez</span></small></span>
+        <span class="btn"><span data-l="en">Choose file</span><span data-l="fr">Choisir un fichier</span></span>
+        <input type="file" id="fileCv" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+      </label>
+      <p class="status" id="cvStatus" role="status" hidden></p>
+      <div class="or"><span data-l="en">or paste the text</span><span data-l="fr">ou collez le texte</span></div>
+      <div class="field">
+        <label for="cv"><span data-l="en">CV text</span><span data-l="fr">Texte du CV</span></label>
+        <textarea id="cv" aria-describedby="cvErr" data-ph-en="Paste your CV here…" data-ph-fr="Collez votre CV ici…" spellcheck="false"></textarea>
+        <span class="err" id="cvErr" hidden></span>
+      </div>
+      <div class="row">
+        <button type="button" class="link" id="sample"><span data-l="en">Try with a sample CV and job</span><span data-l="fr">Essayer avec un exemple</span></button>
+        <button type="button" class="primary" id="toEdit"><span data-l="en">Read my CV</span><span data-l="fr">Lire mon CV</span></button>
+      </div>
+    </section>
+
+    <!-- STEP 2: CHECK THE MASTER CV -->
+    <section class="panel" id="s2" aria-labelledby="h2s" hidden>
+      <h2 id="h2s"><span data-l="en">Check what Tailr read</span><span data-l="fr">Vérifiez ce que Tailr a lu</span></h2>
+      <p class="note"><span data-l="en">Correct anything that is wrong or missing. Tailr only uses what is here: it never adds an employer, date, degree, grade, tool or number you didn’t write.</span><span data-l="fr">Corrigez ce qui est faux ou manquant. Tailr n’utilise que ce qui figure ici : il n’ajoute jamais d’employeur, de date, de diplôme, de note, d’outil ou de chiffre que vous n’avez pas écrit.</span></p>
+      <div class="row" id="aiParseRow" hidden>
+        <span class="hint"><span data-l="en">Something read badly (for example a two-column PDF)?</span><span data-l="fr">Quelque chose est mal lu (par exemple un PDF sur deux colonnes) ?</span></span>
+        <button type="button" id="aiParse"><span data-l="en">Read again with AI</span><span data-l="fr">Relire avec l’IA</span></button>
+      </div>
+      <p class="status" id="parseStatus" role="status" hidden></p>
+      <div id="editor" class="editor"></div>
+      <span class="err" id="edErr" hidden></span>
+      <div class="row">
+        <button type="button" id="back1"><span data-l="en">Back</span><span data-l="fr">Retour</span></button>
+        <button type="button" class="primary" id="toJob"><span data-l="en">Looks right: next</span><span data-l="fr">C’est correct : suivant</span></button>
+      </div>
+    </section>
+
+    <!-- STEP 3: JOB -->
+    <section class="panel" id="s3" aria-labelledby="h3s" hidden>
+      <h2 id="h3s"><span data-l="en">Add the job description</span><span data-l="fr">Ajoutez l’offre d’emploi</span></h2>
+      <div class="field">
+        <label for="jd"><span data-l="en">Job description</span><span data-l="fr">Offre d’emploi</span></label>
+        <span class="hint"><span data-l="en">Paste the full posting, including the company, responsibilities and profile. English or French.</span><span data-l="fr">Collez l’offre complète, avec l’entreprise, les missions et le profil. En français ou en anglais.</span></span>
+        <textarea id="jd" aria-describedby="jdErr" data-ph-en="Paste the job description here…" data-ph-fr="Collez l’offre d’emploi ici…" spellcheck="false"></textarea>
+        <span class="err" id="jdErr" hidden></span>
+      </div>
+      <div class="row">
+        <label class="btn" for="fileJd"><span data-l="en">Upload the job (PDF/Word)</span><span data-l="fr">Importer l’offre (PDF/Word)</span>
+          <input type="file" id="fileJd" accept=".pdf,.docx,.txt" class="visually-hidden"></label>
+        <span class="status" id="jdStatus" role="status" hidden></span>
+      </div>
+      <div class="row">
+        <button type="button" id="back2"><span data-l="en">Back</span><span data-l="fr">Retour</span></button>
+        <button type="button" class="primary" id="toMatch"><span data-l="en">Analyse the job</span><span data-l="fr">Analyser l’offre</span></button>
+      </div>
+    </section>
+
+    <!-- STEP 4: MATCH -->
+    <section class="panel" id="s4" aria-labelledby="h4s" hidden>
+      <h2 id="h4s"><span data-l="en">What this job asks for</span><span data-l="fr">Ce que demande cette offre</span></h2>
+      <div id="warnBox" class="warnbox" hidden></div>
+      <fieldset class="target">
+        <legend><span data-l="en">The job, as Tailr read it (correct it if needed)</span><span data-l="fr">L’offre, telle que Tailr l’a lue (corrigez si besoin)</span></legend>
+        <div class="tgrid">
+          <label for="tCompany"><span data-l="en">Company</span><span data-l="fr">Entreprise</span><input type="text" id="tCompany" data-t="company"></label>
+          <label for="tRole"><span data-l="en">Job title</span><span data-l="fr">Intitulé du poste</span><input type="text" id="tRole" data-t="role"></label>
+          <label for="tContract"><span data-l="en">Contract</span><span data-l="fr">Contrat</span><input type="text" id="tContract" data-t="contract"></label>
+          <label for="tStart"><span data-l="en">Start</span><span data-l="fr">Début</span><input type="text" id="tStart" data-t="start"></label>
+          <label for="tDuration"><span data-l="en">Duration</span><span data-l="fr">Durée</span><input type="text" id="tDuration" data-t="duration"></label>
+          <label for="tLocation"><span data-l="en">Location</span><span data-l="fr">Lieu</span><input type="text" id="tLocation" data-t="location"></label>
+        </div>
+      </fieldset>
+      <div class="kwhead">
+        <h3><span data-l="en">Keywords</span><span data-l="fr">Mots-clés</span></h3>
+        <p class="legend"><span class="chip st-present">✓</span> <span data-l="en">in your CV</span><span data-l="fr">dans votre CV</span>
+          <span class="chip st-reword">≈</span> <span data-l="en">in other words</span><span data-l="fr">en d’autres termes</span>
+          <span class="chip st-adjacent">~</span> <span data-l="en">related skill</span><span data-l="fr">compétence proche</span>
+          <span class="chip st-missing">✗</span> <span data-l="en">not in your CV</span><span data-l="fr">absent</span></p>
+      </div>
+      <div class="buckets">
+        <div><span class="k"><span data-l="en">Must have</span><span data-l="fr">Indispensables</span></span><div class="chips" id="kwMust"></div></div>
+        <div><span class="k"><span data-l="en">Nice to have</span><span data-l="fr">Appréciés</span></span><div class="chips" id="kwNice"></div></div>
+        <div><span class="k"><span data-l="en">Context</span><span data-l="fr">Contexte</span></span><div class="chips" id="kwContext"></div></div>
+      </div>
+      <p class="hint"><span data-l="en">Tap a ✗ or ~ keyword only if you truly have that skill: it is then added to your skills for this job.</span><span data-l="fr">Touchez un mot-clé ✗ ou ~ seulement si vous avez vraiment cette compétence : elle est alors ajoutée à vos compétences pour cette offre.</span></p>
+      <div class="field">
+        <label for="kw"><span data-l="en">Add a keyword we missed</span><span data-l="fr">Ajouter un mot-clé oublié</span></label>
+        <div class="addkw"><input type="text" id="kw" data-ph-en="e.g. Salesforce" data-ph-fr="ex. Salesforce" autocomplete="off"><button type="button" id="addKw"><span data-l="en">Add</span><span data-l="fr">Ajouter</span></button></div>
+        <span class="hint" id="kwMsg" role="status"></span>
+      </div>
+      <div class="elig"><h3><span data-l="en">Requirements to check</span><span data-l="fr">Exigences à vérifier</span></h3><ul id="eligList" class="elist"></ul></div>
+      <fieldset class="engine">
+        <legend><span data-l="en">How to write the new version</span><span data-l="fr">Comment écrire la nouvelle version</span></legend>
+        <label class="radio"><input type="radio" name="engine" id="engAuto" value="auto" checked> <span><b><span data-l="en">Best available</span><span data-l="fr">Le meilleur disponible</span></b> <span class="hint" id="engAutoNote"></span></span></label>
+        <label class="radio"><input type="radio" name="engine" id="engRules" value="rules"> <span><b><span data-l="en">Standard (no AI)</span><span data-l="fr">Standard (sans IA)</span></b> <span class="hint"><span data-l="en">Instant, and your CV stays in your browser.</span><span data-l="fr">Instantané, et votre CV reste dans votre navigateur.</span></span></span></label>
+        <ul class="enginelist" id="engineList"></ul>
+        <button type="button" id="dlDevice" hidden><span data-l="en">Download Chrome’s on-device AI</span><span data-l="fr">Télécharger l’IA intégrée de Chrome</span></button>
+        <label for="outLang" class="inline"><span data-l="en">Write the new text in</span><span data-l="fr">Écrire le nouveau texte en</span>
+          <select id="outLang"><option value="en">English</option><option value="fr">Français</option></select></label>
+      </fieldset>
+      <span class="err" id="matchErr" hidden></span>
+      <div class="row">
+        <button type="button" id="back3"><span data-l="en">Back</span><span data-l="fr">Retour</span></button>
+        <button type="button" class="primary" id="tailor"><span data-l="en">Tailor my CV</span><span data-l="fr">Adapter mon CV</span></button>
+      </div>
+      <p class="status" id="progress" role="status" hidden></p>
+    </section>
+
+    <!-- STEP 5: RESULT -->
+    <section class="panel" id="s5" aria-labelledby="h5s" hidden>
+      <h2 id="h5s"><span data-l="en">Your tailored CV</span><span data-l="fr">Votre CV adapté</span></h2>
+      <p class="engineline" id="engineLine"></p>
+      <div class="result">
+        <div class="previewcol">
+          <div id="preview" class="preview" aria-label="Preview"></div>
+        </div>
+        <aside class="reportcol" aria-label="Report">
+          <section class="rbox"><h3><span data-l="en">ATS check</span><span data-l="fr">Contrôle ATS</span></h3><ul id="atsList" class="checks"></ul></section>
+          <section class="rbox">
+            <h3><span data-l="en">Keyword match</span><span data-l="fr">Correspondance des mots-clés</span></h3>
+            <div class="tape" aria-hidden="true"><div class="ticks"></div><div class="nums"><span>0</span><span>20</span><span>40</span><span>60</span><span>80</span><span>100</span></div><div class="mark" id="markA" style="left:0"></div><div class="mark after" id="markB" style="left:0"></div></div>
+            <div class="scores"><div class="score before"><b id="sBefore">0%</b><span><span data-l="en">Before</span><span data-l="fr">Avant</span></span></div><div class="score after"><b id="sAfter">0%</b><span><span data-l="en">After</span><span data-l="fr">Après</span></span></div><div class="score fit"><b id="sFit">–</b><span><span data-l="en">Fit</span><span data-l="fr">Adéquation</span></span></div></div>
+            <p class="hint" id="recommend"></p>
+          </section>
+          <section class="rbox" id="addedBox"><h3><span data-l="en">Keywords added</span><span data-l="fr">Mots-clés ajoutés</span></h3><div class="chips" id="addedList"></div></section>
+          <section class="rbox" id="missBox"><h3><span data-l="en">Missing must-haves</span><span data-l="fr">Indispensables manquants</span></h3><div class="chips" id="missList"></div><ul class="sugg" id="suggList"></ul></section>
+          <section class="rbox" id="eligBox"><h3><span data-l="en">Eligibility</span><span data-l="fr">Éligibilité</span></h3><ul class="elist" id="eligResult"></ul></section>
+          <section class="rbox"><h3><span data-l="en">What changed</span><span data-l="fr">Ce qui a changé</span></h3><ul class="changes" id="changeList"></ul></section>
+        </aside>
+      </div>
+      <div class="dlbar">
+        <div class="dl">
+          <button type="button" class="primary" id="dlPdf" disabled><span data-l="en">Download PDF</span><span data-l="fr">Télécharger en PDF</span></button>
+          <button type="button" id="dlDocx" disabled><span data-l="en">Download Word</span><span data-l="fr">Télécharger en Word</span></button>
+          <button type="button" id="copy"><span data-l="en">Copy text</span><span data-l="fr">Copier le texte</span></button>
+        </div>
+        <span class="status" id="toast" role="status"></span>
+      </div>
+      <p class="err" id="lockMsg" hidden></p>
+      <div class="row">
+        <button type="button" id="editCv"><span data-l="en">Edit my CV</span><span data-l="fr">Modifier mon CV</span></button>
+        <button type="button" id="another"><span data-l="en">Same CV, another job</span><span data-l="fr">Même CV, autre offre</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div class="wrap"><div class="ad" data-slot="result" hidden><span class="adlabel"><span data-l="en">Advertisement</span><span data-l="fr">Publicité</span></span></div></div>
+
+  <section class="wrap content" id="how">
+    <h2><span data-l="en">How it works</span><span data-l="fr">Comment ça marche</span></h2>
+    <div class="grid4">
+      <div><span class="n">01</span><h3><span data-l="en">Read and check</span><span data-l="fr">Lire et vérifier</span></h3><p><span data-l="en">Tailr reads your CV into clear fields. You correct anything wrong, and that checked version becomes the only source of facts.</span><span data-l="fr">Tailr range votre CV dans des champs clairs. Vous corrigez ce qui est faux, et cette version vérifiée devient la seule source de faits.</span></p></div>
+      <div><span class="n">02</span><h3><span data-l="en">Match</span><span data-l="fr">Comparer</span></h3><p><span data-l="en">It lists the job’s must-have, nice-to-have and context keywords, shows which you have, and flags requirements like language level or work authorisation.</span><span data-l="fr">Il liste les mots-clés indispensables, appréciés et de contexte, montre ceux que vous avez, et signale les exigences comme le niveau de langue ou l’autorisation de travail.</span></p></div>
+      <div><span class="n">03</span><h3><span data-l="en">Rewrite and verify</span><span data-l="fr">Réécrire et vérifier</span></h3><p><span data-l="en">The CV is rewritten for this job only. Code then checks every employer, date, degree and number against your real CV and fixes anything invented.</span><span data-l="fr">Le CV est réécrit pour cette offre uniquement. Le code vérifie ensuite chaque employeur, date, diplôme et chiffre avec votre vrai CV et corrige tout ce qui serait inventé.</span></p></div>
+      <div><span class="n">04</span><h3><span data-l="en">Fit and test</span><span data-l="fr">Ajuster et tester</span></h3><p><span data-l="en">It fits on one page, then Tailr reads the PDF back like recruiting software. You can download only when every critical check passes.</span><span data-l="fr">Il tient sur une page, puis Tailr relit le PDF comme un logiciel de recrutement. Le téléchargement n’est possible que si tous les contrôles essentiels passent.</span></p></div>
+    </div>
+  </section>
+
+  <section class="wrap content" id="tips">
+    <h2><span data-l="en">Six tips for a CV that gets through</span><span data-l="fr">Six conseils pour un CV qui passe les filtres</span></h2>
+    <ul class="tips">
+      <li><h3><span data-l="en">Use the job’s own words</span><span data-l="fr">Reprenez les mots de l’offre</span></h3><p><span data-l="en">If the posting says “market research”, don’t write only “studies”. Tracking software and busy recruiters look for the exact terms.</span><span data-l="fr">Si l’offre dit « études de marché », n’écrivez pas seulement « analyses ». Les logiciels et les recruteurs pressés cherchent les termes exacts.</span></p></li>
+      <li><h3><span data-l="en">Keep the layout simple</span><span data-l="fr">Gardez une mise en page simple</span></h3><p><span data-l="en">One column, standard headings, no text inside images or tables. Fancy templates often scramble when software reads them.</span><span data-l="fr">Une colonne, des titres classiques, pas de texte dans des images ou tableaux. Les modèles très graphiques sont souvent mal lus par les logiciels.</span></p></li>
+      <li><h3><span data-l="en">Put the best bullet first</span><span data-l="fr">Mettez le meilleur point en premier</span></h3><p><span data-l="en">Recruiters skim the top of each section. Lead with the experience that matches this job, not the one you did first.</span><span data-l="fr">Les recruteurs parcourent le haut de chaque rubrique. Commencez par l’expérience qui correspond à ce poste, pas par la plus ancienne.</span></p></li>
+      <li><h3><span data-l="en">Show results with numbers</span><span data-l="fr">Chiffrez vos résultats</span></h3><p><span data-l="en">“Organised two events with 120 guests” says more than “helped with events”. Numbers make a line easy to remember.</span><span data-l="fr">« Organisé deux événements de 120 invités » dit plus que « aide à l’événementiel ». Les chiffres se retiennent.</span></p></li>
+      <li><h3><span data-l="en">Never claim what you can’t defend</span><span data-l="fr">Ne revendiquez que ce que vous savez défendre</span></h3><p><span data-l="en">A skill on your CV is a question in your interview. Add a missing skill only if you can give a real example.</span><span data-l="fr">Une compétence sur le CV, c’est une question en entretien. Ajoutez-la seulement si vous pouvez donner un exemple concret.</span></p></li>
+      <li><h3><span data-l="en">One CV per application</span><span data-l="fr">Un CV par candidature</span></h3><p><span data-l="en">Keep a master CV with everything, then cut and reorder it for each offer. Tailr does this in minutes.</span><span data-l="fr">Gardez un CV complet, puis adaptez-le et réordonnez-le pour chaque offre. Tailr le fait en quelques minutes.</span></p></li>
+    </ul>
+  </section>
+
+  <div class="wrap"><div class="ad" data-slot="content" hidden><span class="adlabel"><span data-l="en">Advertisement</span><span data-l="fr">Publicité</span></span></div></div>
+
+  <section class="wrap content" id="faq">
+    <h2>FAQ</h2>
+    <div>
+      <details><summary><span data-l="en">Is Tailr free?</span><span data-l="fr">Tailr est-il gratuit ?</span></summary><p><span data-l="en">Yes. The site is funded by ads, and there is no account to create.</span><span data-l="fr">Oui. Le site est financé par la publicité, et il n’y a pas de compte à créer.</span></p></details>
+      <details><summary><span data-l="en">Do you store my CV?</span><span data-l="fr">Stockez-vous mon CV ?</span></summary><p><span data-l="en">No. Your CV is read in your browser and nothing is saved on a server. With “Standard (no AI)” or Chrome’s on-device AI, it never leaves your computer. With cloud AI, the text of your CV and the job is sent to our AI service on Cloudflare to write the new version; it is not stored by us and Cloudflare does not use it to train models.</span><span data-l="fr">Non. Votre CV est lu dans votre navigateur et rien n’est enregistré sur un serveur. Avec « Standard (sans IA) » ou l’IA intégrée de Chrome, il ne quitte jamais votre ordinateur. Avec l’IA en ligne, le texte de votre CV et de l’offre est envoyé à notre service d’IA chez Cloudflare pour écrire la nouvelle version ; nous ne le conservons pas et Cloudflare ne l’utilise pas pour entraîner ses modèles.</span></p></details>
+      <details><summary><span data-l="en">Can the AI invent things on my CV?</span><span data-l="fr">L’IA peut-elle inventer des choses sur mon CV ?</span></summary><p><span data-l="en">Tailr doesn’t trust the AI. After every rewrite, code compares each employer, title, date, degree, grade, language and number with the CV you checked. Anything new is removed and replaced with your original text, and skills can only be ones your CV shows.</span><span data-l="fr">Tailr ne fait pas confiance à l’IA. Après chaque réécriture, le code compare chaque employeur, intitulé, date, diplôme, note, langue et chiffre avec le CV que vous avez vérifié. Tout ajout est retiré et remplacé par votre texte d’origine, et seules les compétences visibles dans votre CV sont gardées.</span></p></details>
+      <details><summary><span data-l="en">Which jobs does it work for?</span><span data-l="fr">Pour quels métiers ça marche ?</span></summary><p><span data-l="en">Marketing, sales, finance, accounting, HR, tech, data, design, operations, legal, engineering, hospitality and more. If a tool or skill isn’t recognised, add it yourself in step 4.</span><span data-l="fr">Marketing, vente, finance, comptabilité, RH, tech, data, design, opérations, juridique, ingénierie, hôtellerie et plus. Si un outil ou une compétence n’est pas reconnu, ajoutez-le vous-même à l’étape 4.</span></p></details>
+      <details><summary><span data-l="en">Why didn’t my PDF upload work?</span><span data-l="fr">Pourquoi mon PDF ne s’importe-t-il pas ?</span></summary><p><span data-l="en">Some PDFs are scanned images with no selectable text. Open your CV in Word or Google Docs and copy the text into the box instead.</span><span data-l="fr">Certains PDF sont des images scannées, sans texte sélectionnable. Ouvrez votre CV dans Word ou Google Docs et copiez le texte dans la zone.</span></p></details>
+      <details><summary><span data-l="en">Does a higher score guarantee an interview?</span><span data-l="fr">Un meilleur score garantit-il un entretien ?</span></summary><p><span data-l="en">No. The score shows how many of the job’s keywords your CV contains. It helps you get read; your experience gets you the interview.</span><span data-l="fr">Non. Le score indique combien de mots-clés de l’offre votre CV contient. Il aide à être lu ; c’est votre expérience qui décroche l’entretien.</span></p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Tailr</span>
+    <nav>
+      <a href="privacy.html"><span data-l="en">Privacy</span><span data-l="fr">Confidentialité</span></a>
+      <a href="legal.html"><span data-l="en">Legal notice</span><span data-l="fr">Mentions légales</span></a>
+    </nav>
+  </div>
+</footer>
+
+<script src="vendor/libphonenumber-min.js"></script>
+<script src="skills.js"></script>
+<script src="engine.js"></script>
+<script src="phone.js"></script>
+<script src="parse.js"></script>
+<script src="job.js"></script>
+<script src="tailor.js"></script>
+<script src="schema-validate.js"></script>
+<script src="validate.js"></script>
+<script src="layout.js"></script>
+<script src="render.js"></script>
+<script src="atscheck.js"></script>
+<script src="pipeline.js"></script>
+<script src="session.js"></script>
+<script src="prompt.js"></script>
+<script src="ai.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
